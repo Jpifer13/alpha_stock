@@ -1,0 +1,65 @@
+<!-- This is a simple html template that is using jinja to replace title
+information and can replace whatever ytou want using variables that are 
+passed to it. -->
+<!DOCTYPE html>
+<html>
+<script>
+    var list_of_data = {{ data }}
+    function CreateTableFromJSON() {
+        // get keys of data to use as column names
+        
+        var col = [];
+        for (keys in data[0]) {
+            col.push(keys)
+        }
+        console.log(col)
+    
+
+
+        // CREATE DYNAMIC TABLE.
+        var table = document.createElement("table");
+
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+        var tr = table.insertRow(-1);                   // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+        for (var i = 0; i < list_of_data.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = list_of_data[i][col[j]];
+            }
+        }
+
+        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+        var divContainer = document.getElementById("showData");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+    }
+</script>
+<head>
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Stock App Main Page</title>
+    {% endif %}
+</head>
+
+<body>
+    Just an example that a webpage can be made and given the data to be put in a table or whatever
+    <input type="button" onclick="CreateTableFromJSON()" value="Create Table From JSON" />
+    <p id="showData"></p>
+</body>
+
+
+
+</html>

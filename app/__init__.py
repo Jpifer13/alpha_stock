@@ -7,4 +7,4 @@ app = Flask(__name__)
 apiKey = os.environ.get('ALPHAVANTAGE_API_KEY')
 # app.config.from_object(Config)
 
-# from app import routes
+from app import routes
