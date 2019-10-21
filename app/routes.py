@@ -14,8 +14,9 @@ def index():
 
     data, meta_data = get_company_intraday('GOOGL')
     
-    print(data['2019-10-14 15:30']['Real Lower Band'])
+    # print(data['2019-10-14 15:30']['Real Lower Band'])
+    print(data['2019-10-14 15:30'])
     list_of_data = dict_to_list(data)
-    # print(list_of_data)
+    print(list_of_data[0])
 
-    return render_template('mainpage.html', title='Stock App', data=list_of_data)
+    return render_template('mainpage.html', title='Stock App', list_of_data=list_of_data)
