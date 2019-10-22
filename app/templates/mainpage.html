@@ -24,9 +24,7 @@ passed to it. -->
         // get keys of data to use as column names
         
         var col = [];
-        console.log(Object.keys(list_data)[0])
-        console.log(Object.keys(data))
-        for (keys in data[0]) {
+        for (keys in list_data[0]) {
             col.push(keys)
         }
     
@@ -35,24 +33,36 @@ passed to it. -->
         // CREATE DYNAMIC TABLE.
         var table = document.createElement("table");
 
+        // CREATE THE STYLE OF THE TABLE
+        table.style.width = "100%"
+        table.style.border = "1px solid black"
+        table.style.borderCollapse = "collapse"
+
         // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
         var tr = table.insertRow(-1);                   // TABLE ROW.
 
         for (var i = 0; i < col.length; i++) {
             var th = document.createElement("th");      // TABLE HEADER.
+            th.style.border = "1px solid black"
             th.innerHTML = col[i];
             tr.appendChild(th);
         }
 
         // ADD JSON DATA TO THE TABLE AS ROWS.
-        for (var i = 0; i < data.length; i++) {
-
+        for (var i = 0; i < list_data.length; i++) {
+            
             tr = table.insertRow(-1);
+
+            if(i % 2 == 0){
+                tr.style.backgroundColor = "#f2f2f2"
+            }
 
             for (var j = 0; j < col.length; j++) {
                 var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = data[i][col[j]];
+                tabCell.style.border = "1px solid black"
+                tabCell.style.borderCollapse = "collapse"
+                tabCell.innerHTML = list_data[i][col[j]];
             }
         }
 
