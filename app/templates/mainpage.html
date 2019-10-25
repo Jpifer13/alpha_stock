@@ -18,17 +18,21 @@ passed to it. -->
 </body>
 <script>
     var data = '{{ list_of_data|tojson }}';
+    var keys_data = '{{ keys|tojson }}'
     function CreateTableFromJSON() {
+        // Convert data from string to array of objects
         data = data.slice(1, data.length - 1)
         var list_data = JSON.parse("[" + data + "]")
-        // get keys of data to use as column names
+
+        // Convert keys_data from string to array of strings
+        keys_data = keys_data.slice(1, keys_data.length - 1)
+        var keys_data_list = JSON.parse("[" + keys_data + "]")
         
-        var col = [];
+        // get keys of data to use as column names
+        var col = ["Time"];
         for (keys in list_data[0]) {
             col.push(keys)
         }
-    
-
 
         // CREATE DYNAMIC TABLE.
         var table = document.createElement("table");
@@ -62,7 +66,12 @@ passed to it. -->
                 var tabCell = tr.insertCell(-1);
                 tabCell.style.border = "1px solid black"
                 tabCell.style.borderCollapse = "collapse"
-                tabCell.innerHTML = list_data[i][col[j]];
+                if(j == 0){
+                    tabCell.innerHTML = keys_data_list[j];
+                }
+                else{
+                    tabCell.innerHTML = list_data[i][col[j]];
+                }
             }
         }
 
