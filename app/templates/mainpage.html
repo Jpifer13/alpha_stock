@@ -3,6 +3,7 @@ information and can replace whatever ytou want using variables that are
 passed to it. -->
 <!DOCTYPE html>
 <html>
+<form method="POST">
 <head>
     {% if title %}
     <title>{{ title }}</title>
@@ -13,7 +14,9 @@ passed to it. -->
 
 <body>
     Just an example that a webpage can be made and given the data to be put in a table or whatever<br>
-    <input type="button" onclick="CreateTableFromJSON()" value="Create Table From JSON" />
+        <!-- Company Symbol: <input type="text" name="symbol"><br> -->
+        <input type="button" onclick="CreateTableFromJSON()" value="Create Table From JSON" />
+    
     <p id="showData"></p>
 </body>
 <script>
@@ -81,6 +84,5 @@ passed to it. -->
         divContainer.appendChild(table);
     }
 </script>
-
-
+</form>
 </html>
